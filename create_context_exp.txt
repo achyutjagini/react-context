@@ -1,0 +1,52 @@
+/*In React, createContext is a function that creates a new context object.
+
+A context object allows you to share data between components without 
+passing the data through every level of the component tree explicitly as props.
+Here's an example of how you might use createContext in React:
+
+*/
+
+import { createContext } from 'react';
+
+// Create a new context object with an initial value of null
+const MyContext = createContext(null);
+
+// Export the context object
+export default MyContext;
+
+/*
+In this example, we're creating a new context object called MyContext 
+using createContext. The context object is initialized with a 
+default value of null.
+
+You can then use this context object to pass data down the 
+component tree. For example:
+
+*/
+
+/*
+In this example, MyComponent is rendering a child component called 
+ChildComponent. MyComponent wraps ChildComponent in a MyContext.Provider
+component and sets the value prop to "Hello, world!".
+
+Inside ChildComponent, we use the useContext hook to access the 
+value passed down through the MyContext context object. We then
+render that value inside a div.
+
+Note that in order to use the useContext hook, we need to 
+import it from the react module.
+*/
+import MyContext from './MyContext';
+
+function MyComponent() {
+  return (
+    <MyContext.Provider value="Hello, world!">
+      <ChildComponent />
+    </MyContext.Provider>
+  );
+}
+
+function ChildComponent() {
+  const value = useContext(MyContext);
+  return <div>{value}</div>;
+}

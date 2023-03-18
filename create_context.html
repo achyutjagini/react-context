@@ -1,0 +1,49 @@
+<!--
+In this example, MyComponent is rendering a child component called 
+ChildComponent. MyComponent wraps ChildComponent in a MyContext.Provider
+component and sets the value prop to "Hello, world!".
+
+Inside ChildComponent, we use the useContext hook to access the 
+value passed down through the MyContext context object. We then
+render that value inside a div.
+
+Note that in order to use the useContext hook, we need to 
+import it from the react module.
+-->
+<html>
+<head>
+<title>counter</title>
+<script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"> </script>
+</head>
+<body>
+<div id="mydiv"></div>
+<script type="text/babel">
+
+const MyContext = React.createContext(null);
+// Export the context object
+//export default MyContext;
+
+
+function MyComponent() {
+  return (
+    <MyContext.Provider value="Hello, world!">
+      <ChildComponent />
+    </MyContext.Provider>
+  );
+}
+
+function ChildComponent() {
+  const value = React.useContext(MyContext);
+  return <div><p>{value}</p></div>;
+}
+
+
+const container=document.getElementById("mydiv");
+const root =ReactDOM.createRoot(container);
+root.render(<MyComponent/>);
+
+</script>
+</body>
+</html>
